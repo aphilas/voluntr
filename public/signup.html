@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Voluntr | Sign Up</title>
+
+  <link rel="stylesheet" href="./css/pages/signup.css">
+  <script src="./js/signup.js" type="module" defer></script>
+</head>
+<body>
+  <header class="header">
+    <p class="header-title">Voluntr</p>
+
+    <nav class="nav">
+      <ul class="nav-ul">
+        <li>Dashboard</li>
+        <li>About</li>
+        <li>Profile</li>
+      </ul>
+    </nav>
+
+    <div class="header-auth">
+      <ul>
+        <li>
+          <button class="button button--primary">Log In</button>
+        </li>
+        <!-- <li>Sign Up</li> -->
+      </ul>
+    </div>
+  </header>
+
+  <section class="signup">
+    <div class="signup-wrapper">
+      <h2 class="signup-title">Sign Up</h2>
+    
+      <!-- <form method="post" action="http://localhost:8080/signup" class="signup-form"> -->
+      <form class="signup-form">
+        <label for="username">Username: </label>
+        <input type="text" name="username" id="username" placeholder="jack">
+    
+        <label for="email">Email: </label>
+        <input type="email" name="email" id="email" placeholder="jackdoe@mail.com">
+    
+        <label for="password">Password: </label>
+        <input type="password" name="password" id="password" placeholder="xHyVYDh7xbK&">
+    
+        <div class="signup-form-submit">
+          <input class="button button--outline" type="submit" value="Sign Up">
+        </div>
+      </form>
+    </div>
+  </section>
+</body>
+</html>

@@ -1,0 +1,19 @@
+
+.button {
+  border: none;
+  padding: .6em 2em;
+  font-weight: bold;
+}
+
+.button--primary {
+  background-color: var(--pri-bg-color);
+  color: white;
+  border-radius: 5px;
+}
+
+.button--outline {
+  background-color: rgba(255, 255, 255, 0);
+  border-radius: 20px;
+  border: 2px solid var(--pri-bg-color);
+  color: var(--pri-bg-color);
+}

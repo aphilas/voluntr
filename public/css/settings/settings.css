@@ -1,0 +1,5 @@
+body {
+  --primary-fg-color: rgb(28, 40, 51);
+  --pri-bg-color: rgba(31, 0, 110, 1);
+  --box-shadow: .05em .05em 7.5px rgba(180, 180, 180, .8);
+}
