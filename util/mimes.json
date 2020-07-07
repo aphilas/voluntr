@@ -1,0 +1,41 @@
+{
+  ".htm": "text/html",
+  ".html": "text/html",
+  ".css":  "text/css",
+  ".js":   "text/javascript",
+  ".mjs":   "text/javascript",
+  
+  ".svg":  "image/svg+xml",
+  ".gif": "image/gif",
+  ".ico": "image/vnd.microsoft.icon",
+  ".jpeg": "image/jpeg",
+  ".jpg": "image/jpeg",
+  ".png": "image/png",
+  ".tiff": "image/tiff",
+  ".tif": "image/tiff",
+  ".webp": "image/webp",
+  
+  ".wav": "audio/wav",
+  ".weba": "audio/webm",
+  ".mp3": "audio/mpeg",
+  ".oga": "audio/ogg",
+  
+  ".webm": "video/webm",
+  ".mpeg": "video/mpeg",
+  ".ogv": "video/ogg",
+
+  ".otf": "font/otf",
+  ".ttf": "font/ttf",
+  ".woff": "font/woff",
+  ".woff2": "font/woff2",
+
+  ".rar": "application/vnd.rar",
+  ".zip": "application/zip",
+  ".7z": "application/x-7z-compressed",
+  
+  ".txt": "text/plain",
+  ".json": "text/json",
+  ".xml": "text/xml",
+  ".pdf": "application/pdf",
+  ".bin": "application/octet-stream"
+}

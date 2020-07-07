@@ -1,9 +1,11 @@
 import http from 'http'
 import pathParser from 'path'
 import urlParser from 'url'
-import { requestHandler } from './lib/router.js'
-import { staticRouter } from './lib/static-server.js'
+import { staticServer } from './lib/server.js'
 import { router } from './routes/routes.js'
+
+const secretKey = process.argv[3]
+const baseUrl = 'http://localhost:8080/'
 
 const port = parseInt(process.argv[2]) || 8080
 const publicDir = 'public/'
@@ -15,9 +17,9 @@ server.on('request', (req, res) => {
   const path = pathParser.join(process.cwd(), publicDir, url.pathname)
 
   if (pathParser.extname(path)) {
-    staticRouter(publicDir, req, res)
+    staticServer(publicDir, req, res)
   } else {
-    requestHandler(router, req, res)
+    router.handle(req, res)
   }
 
   req.on('error', err => {
@@ -30,3 +32,6 @@ server.on('request', (req, res) => {
 })
 
 server.listen(port)
+console.info(`Server started on: http://localhost:${port}`)
+
+export { secretKey, baseUrl }
