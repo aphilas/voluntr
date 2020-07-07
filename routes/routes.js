@@ -1,31 +1,71 @@
-import serveHtml from '../util/server/serve-html.js'
-import postLogin from './post-login.js'
-import getLogin from './get-login.js'
-import postSignup from './post-signup.js'
-import { postLogout } from './post-logout.js'
-import { createRouter } from '../lib/router.js'
-import { getSecure } from './get-secure.js'
+import { serveHtml } from '../lib/server.js'
+import { Router } from '../lib/router.js'
+import postLogin from './login.js'
+import postSignup from './signup.js'
 
-const router = createRouter()
+import { getSaved, getApls, getJobs } from './api-get.js'
+import { delJob, delSaved } from './api-delete.js'
+import { postApl, postJob, postSaved } from './api-post.js'
+import { putJob, patchJobStatus } from './api-update.js'
 
-const paramsTest = (req, res, params) => {
-  res.writeHead(200, {'Content-Type': 'text/plain'})
-  res.write(JSON.stringify(params))
+const router = Router()
+
+router.addMultiple('get', new Map([
+  ['/', (req, res) => serveHtml('public/index.html', res)],
+  ['/api/saved-jobs/:id', (req, res, params) => getSaved(req, res, params, 'user') ],
+  ['/api/apl/:id', (req, res, params) => getApls(req, res, params, 'id') ],
+  ['/api/apl/job/:id', (req, res, params) => getApls(req, res, params, 'job') ],
+  ['/api/apl/user/:userId/job/:jobId', (req, res, params) => getApls(req, res, params, 'user-job') ],
+  ['/api/apl/user/:id', (req, res, params) => getApls(req, res, params, 'user') ],
+  ['/api/jobs/', (req, res, params) => getJobs(req, res, params, 'all') ],
+  ['/api/jobs/:id', (req, res, params) => getJobs(req, res, params, 'id') ],
+  ['/api/jobs/org/:id', (req, res, params) => getJobs(req, res, params, 'org') ],
+  ['/api/jobs/status/:status', (req, res, params) => getJobs(req, res, params, 'status')],
+]))
+
+router.addMultiple('post', new Map([
+  ['/api/job', postJob],
+  ['/api/saved-job', postSaved],
+  ['/api/apl', postApl],
+
+  ['/login', postLogin],  
+  ['/signup', postSignup],
+]))
+
+router.addMultiple('delete', new Map([
+  ['/api/job/:id', delJob],
+  ['/api/saved-job', delSaved]
+]))
+
+router.addMultiple('patch', new Map([
+  ['/api/job/:id/activate', patchJobStatus('activate')],
+  ['/api/job/:id/deactivate', patchJobStatus('deactivate')],
+  ['/api/job/:id/delete', patchJobStatus('delete')],
+]))
+
+router.addMultiple('put', new Map([
+  ['/api/job/:id', putJob],
+]))
+
+
+/**
+ * 
+ 
+  const { token } = readCookies(req)
+  setHeaders(res, { contentType: 'text/plain' })
+
+  const decodeToken = token ? decodeJWT(token) : undefined
+
+  if (token && decodeToken) {
+    res.write(`Dashboard: ${ decodeToken.username }`)
+  } else if (token && !decodeToken) {
+    res.write('Token tampered with')
+  } else {
+    res.write('Please login')
+  }
+
   res.end()
-}
-
-router.add('get', '/', (req, res) => serveHtml('public/index.html', res))
-router.add('get', '/users/:id/category', paramsTest)
-router.add('get', '/users/:id/category/:theme', paramsTest)
-router.add('get', '/users/:id', paramsTest)
-router.add('get', '/about', (req, res) => serveHtml('public/about.html', res))
-
-router.add('post', '/login', postLogin)
-router.add('get', '/login', getLogin)
-
-router.add('post', '/logout', postLogout)
-router.add('post', '/signup', postSignup)
-
-router.add('get', '/secure', getSecure)
+  
+ */
 
 export { router }
