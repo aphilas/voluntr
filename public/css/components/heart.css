@@ -1,0 +1,14 @@
+.heart {
+  fill: none;
+  width: 1.25em;
+  cursor: pointer;
+  stroke: rgba(180, 180, 180, .8);
+  stroke-width: 2px;
+  overflow: visible !important;
+}
+
+.heart:hover, .heart.active {
+  --heart-color: rgba(235, 0, 0, .8);
+  stroke: var(--heart-color);
+  fill: var(--heart-color);
+}

@@ -1,0 +1,9 @@
+.tag {
+  background-color: rgba(0, 116, 232, .2);
+  color: rgba(0, 116, 232, 1);
+  border-radius: 5em;
+  padding: .5em 1.5em;
+  font-size: small;
+  font-weight: 500;
+  margin: 0;
+}

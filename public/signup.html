@@ -12,44 +12,78 @@
   <header class="header">
     <p class="header-title">Voluntr</p>
 
-    <nav class="nav">
+    <input type="checkbox" id="menu">
+    <label for="menu" onclick></label> <!-- ios hack -->
+
+    <nav class="nav" role="off-canvas">
       <ul class="nav-ul">
-        <li>Dashboard</li>
-        <li>About</li>
-        <li>Profile</li>
+        <!-- <li><a href="./index.html">Home</a></li>
+        <li><a href="./applications.html">Applications</a></li>
+        <li><a href="./saved-jobs.html">Saved jobs</a></li>
+        <li><a href="./profile.html">Profile</a></li> -->
+        <li><a href="./about.html">About</a></li>
       </ul>
     </nav>
 
     <div class="header-auth">
       <ul>
         <li>
-          <button class="button button--primary">Log In</button>
+          <a href="./login.html">
+            <button class="t-btn primary">Log In</button>
+          </a>
         </li>
         <!-- <li>Sign Up</li> -->
       </ul>
     </div>
   </header>
 
-  <section class="signup">
-    <div class="signup-wrapper">
-      <h2 class="signup-title">Sign Up</h2>
-    
-      <!-- <form method="post" action="http://localhost:8080/signup" class="signup-form"> -->
-      <form class="signup-form">
-        <label for="username">Username: </label>
-        <input type="text" name="username" id="username" placeholder="jack">
-    
-        <label for="email">Email: </label>
-        <input type="email" name="email" id="email" placeholder="jackdoe@mail.com">
-    
-        <label for="password">Password: </label>
-        <input type="password" name="password" id="password" placeholder="xHyVYDh7xbK&">
-    
-        <div class="signup-form-submit">
-          <input class="button button--outline" type="submit" value="Sign Up">
-        </div>
-      </form>
-    </div>
-  </section>
+  <main>
+    <section class="signup content">
+      <div class="signup-wrapper">
+        <h2 class="signup-title">Sign Up</h2>
+      
+        <!-- <form method="post" action="http://localhost:8080/signup" class="signup-form"> -->
+        <form class="signup-form" method="POST">
+          <div class="field-wrapper">
+            <label for="fname">First Name </label>
+            <input type="text" name="fname" id="fname" placeholder="Jake" class="t-inp solid">
+          </div>
+          
+          <div class="field-wrapper">
+            <label for="lname">Last Name </label>
+            <input type="text" name="lname" id="lname" placeholder="Knapp" class="t-inp solid">
+          </div>
+  
+          <div class="field-wrapper">
+            <label for="lname">Skill </label>
+            <select name="skills" id="skill" class="t-sel">
+              <option value="coding" selected>Coding</option>
+              <option value="design">Design</option>
+              <option value="health">Health</option>
+              <option value="finance">Finance</option>
+              <option value="law">Law</option>
+              <option value="engineering">Engineering</option>
+              <option value="training">Training</option>
+            </select>
+          </div>
+      
+          <div class="field-wrapper">
+            <label for="email">Email </label>
+            <input type="email" name="email" id="email" placeholder="jackdoe@mail.com" class="t-inp solid">
+          </div>
+  
+          <div class="field-wrapper">
+            <label for="password">Password </label>
+            <input type="password" name="password" id="password" placeholder="xHyVYDh7xbK&" class="t-inp solid">
+          </div>
+      
+          <div class="signup-form-submit">
+            <input class="t-btn outline" type="submit" value="Sign Up">
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+
 </body>
 </html>

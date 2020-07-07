@@ -1,15 +1,85 @@
-
 .header {
   padding: .5em 1em;
   box-shadow: var(--box-shadow);
 
+  position: sticky;
+  top: 0;
+  background-color: white;
+
   display: flex;
   align-items: center;
+  justify-content: space-between;
 }
 
 .header-title {
   font-weight: bold;
 }
+
+.header input[type="checkbox"] {
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+}
+
+.header > nav a {
+  text-decoration: none;
+  color: var(--grey);
+  cursor: pointer;
+}
+
+.header > nav a:hover {
+  color: var(--pri-fg-color);
+}
+
+/* responsive nav */
+
+@media screen and (max-width: 44em) {
+  body {
+    overflow-x: hidden;
+  }
+  
+  .header label {
+    display: inline-block;
+  }
+
+  .header-auth {
+    /* order: 2; */
+    display: none;
+  }
+  
+  .header label:after {
+    content: "\2261";
+    font-size: 2em;
+    cursor: pointer;
+    user-select: none;
+  }
+  
+  .header > nav[role="off-canvas"] {
+    position: absolute;
+    /* left: 0; */
+    left: -80em;
+    top: 4em;
+    width: 100%;
+    margin: 0;
+    background: white;
+    padding: 0;
+    box-shadow: var(--bottom-box-shadow);
+  }
+  
+  .header > nav[role="off-canvas"] > ul {
+    padding-left: 0;
+  }
+  
+  .header > nav[role="off-canvas"] > ul > li {
+    width: 100%;
+  }
+  
+  input:checked ~ nav[role="off-canvas"] {
+    left: 0;
+  }
+}
+
+/*  */
 
 .nav {
   flex-grow: 2;

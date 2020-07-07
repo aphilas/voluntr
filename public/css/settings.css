@@ -1,0 +1,44 @@
+body {
+
+  /* colors */
+
+  --primary-fg-color: rgb(28, 40, 51);
+  --pri-bg-color: rgba(31, 0, 110, 1);
+  --grey: rgba(50, 50, 50, .85);
+  --selection-background: #005ccc !important;
+  --selection-color: #ffffff !important;
+
+  /* shadows */
+
+  --box-shadow: .05em .05em 7.5px rgba(180, 180, 180, .8);
+  --box-shadow-light: 0 .25em 10px -1px rgba(200, 200, 200, .6);
+  --bottom-box-shadow: 0 .25em 7.5px -2px rgba(180, 180, 180, .8);
+
+  /* spacing */
+
+  --space-unit: 1em;
+  --space-xs:   calc(0.5 * var(--space-unit));
+  --space-sm:   calc(0.75 * var(--space-unit));
+  --space-md:   calc(1.25 * var(--space-unit));
+  --space-lg:   calc(2 * var(--space-unit));
+  --space-xl:   calc(3.25 * var(--space-unit));
+
+  /* typography */
+
+  --text-base-size: 1em;
+  --text-scale-ratio: 1.15;
+
+  --text-xs: calc(1em / (var(--text-scale-ratio) * var(--text-scale-ratio)));
+  --text-sm: calc(1em / var(--text-scale-ratio));
+  --text-md: calc(1em * var(--text-scale-ratio));
+  --text-lg: calc(1em * var(--text-scale-ratio) * var(--text-scale-ratio));
+  --text-xl: calc(1em * var(--text-scale-ratio) * var(--text-scale-ratio) * var(--text-scale-ratio));
+  --text-xxl: calc(1em * var(--text-scale-ratio) * var(--text-scale-ratio) * var(--text-scale-ratio) * var(--text-scale-ratio));
+  --text-xxxl: calc(1em * var(--text-scale-ratio) * var(--text-scale-ratio) * var(--text-scale-ratio) * var(--text-scale-ratio) * var(--text-scale-ratio));
+}
+
+@media screen and (max-width: 44em) {
+  body {
+    --text-scale-ratio: 1.1;
+  }
+}

@@ -2,5 +2,10 @@
 @import "../generic.css";
 @import "../elements.css";
 @import "../components/header.css";
-@import "../components/signup-form.css";
-@import "../components/error.css";
+/* @import "../components/form.css"; */
+
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

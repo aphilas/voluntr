@@ -4,18 +4,60 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Voluntr | Log In</title>
+
+  <link rel="stylesheet" href="./css/pages/login.css">
+  <script src="./js/login.js" type="module"></script>
 </head>
 <body>
-  <h1>Voluntr Log In</h1>
+  <header class="header">
+    <p class="header-title">Voluntr</p>
 
-  <form method="post" action="http://localhost:8080/login">
-    <label for="email">Email: </label>
-    <input type="email" name="email" id="email">
+    <input type="checkbox" id="menu">
+    <label for="menu" onclick></label> <!-- ios hack -->
 
-    <label for="password">Password: </label>
-    <input type="password" name="password" id="password">
+    <nav class="nav" role="off-canvas">
+      <ul class="nav-ul">
+        <!-- <li><a href="./index.html">Home</a></li>
+        <li><a href="./applications.html">Applications</a></li>
+        <li><a href="./saved-jobs.html">Saved jobs</a></li>
+        <li><a href="./profile.html">Profile</a></li> -->
+        <li><a href="./about.html">About</a></li>
+      </ul>
+    </nav>
 
-    <input type="submit" value="Log In">
-  </form>
+    <div class="header-auth">
+      <ul>
+        <li>
+          <a href="./signup.html"><button class="t-btn primary">Sign Up</button></a>
+        </li>
+      </ul>
+    </div>
+  </header>
+
+  <main>
+    <section class="form-section">
+      <div class="form-wrapper">
+        <h2 class="form-title">Log In</h2>
+      
+        <form class="form login" method="POST">    
+          <div class="field-wrapper">
+            <label for="email">Email </label>
+            <input type="email" name="email" id="email" placeholder="jackdoe@mail.com" class="t-inp solid">
+          </div>
+  
+          <div class="field-wrapper">
+            <label for="password">Password </label>
+            <input type="password" name="password" id="password" placeholder="xHyVYDh7xbK&" class="t-inp solid">
+          </div>
+      
+          <div class="form-submit">
+            <input class="t-btn outline" type="submit" value="Log In">
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+
 </body>
 </html>

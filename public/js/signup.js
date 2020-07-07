@@ -1,21 +1,31 @@
-
-import { encodeFormData } from '../js/utils/request.js'
+import { baseUrl } from '../js/config.js'
+import { formDataObj } from './utils.js'
+import { Error, sel, h } from './dom.js'
 
 const signupForm = document.querySelector('.signup-form')
 
 const signupRequest = async (formData) => {
-  const url = 'http://localhost:8080/signup'
-  const headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' })
+  const url = baseUrl + '/signup'
+  const headers = new Headers({ 'Content-Type': 'text/json' })
   const options = {
     method: 'POST',
     headers,
-    body: encodeFormData(formData),
+    body: JSON.stringify(formDataObj(formData)),
   }
 
   const response = await fetch(url, options)
-  const { success, redirect = undefined } = await response.json()
+  const { success, redirect = baseUrl + '/login.html', error, message } = await response.json()
+  console.log({ success, redirect, error, message })
+  if (success) {
+    window.location.assign(redirect)
+  }
 
-  if (success) window.location.href = redirect
+  if (error && error === 'Signup Email Error' ) {
+    const container = sel('main').appendChild(h('div'))
+    const el = h('p', {}, `${message}. Try `,
+      h('a', { href: './login.html' }, 'Logging In.' ))
+    Error(container).append(el) 
+  }
 }
 
 signupForm.addEventListener('submit', event => {

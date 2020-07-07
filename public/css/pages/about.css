@@ -1,0 +1,15 @@
+@import "../settings.css";
+@import "../generic.css";
+@import "../elements.css";
+@import "../components/header.css";
+/* @import "../components/form.css"; */
+
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.readable {
+  max-width: 40em;
+}
