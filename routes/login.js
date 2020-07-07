@@ -4,7 +4,8 @@ import { setHeaders } from '../lib/server.js'
 import { getUserByEmail } from '../lib/db.js'
 import { hashEqual, encodeJWT, hashString } from '../lib/auth.js'
 import { loginEmailError, loginPasswordError, paramsError } from '../util/errors.js'
-import { baseUrl } from '../index.js'
+
+const baseUrl = process.argv[4]
 
 export default async function(req, res, options = {}) {
   const { email, password } = await parseRequestJson(req)
