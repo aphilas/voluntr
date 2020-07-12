@@ -61,6 +61,7 @@ const parseCookies = cookie => {
 }
 
 const snakeToCamel = str => str.replace(/(\_\w)/g, k => k[1].toUpperCase())
+const camelToSnake = str => str.replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`)
 
 const StepWise = arr => {
   let index = 0
@@ -118,4 +119,4 @@ const queryServer = async (method, url, payload) => {
   }
 }
 
-export { formDataObj, debounce, throttle, objToCamel, snakeToCamel, parseJwt, parseCookies, StepWise, queryServer }
+export { formDataObj, debounce, throttle, objToCamel, snakeToCamel, camelToSnake, parseJwt, parseCookies, StepWise, queryServer }
