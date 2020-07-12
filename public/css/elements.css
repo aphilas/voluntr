@@ -17,6 +17,10 @@ h1, .text--xxl {
   font-size: var(--text-xxl);
 }
 
+h1 {
+  font-weight: 500;
+}
+
 h2, .text--xl {
   font-size: var(--text-xl);
 }
@@ -43,6 +47,10 @@ h4, .text--md {
   border: none;
   padding: .6em 2em;
   font-weight: bold;
+}
+
+.t-btn:disabled {
+  opacity: .6;
 }
 
 .t-btn.primary {
@@ -113,6 +121,7 @@ select.t-sel:focus {
 
 select.t-sel:disabled, select.t-sel[aria-disabled=true] {
   color: graytext;
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' version='1.1' height='10px' width='15px'%3E%3Ctext x='0' y='10' fill='lightgrey'%3E%E2%96%BE%3C/text%3E%3C/svg%3E");
   /* TODO */
 }
 

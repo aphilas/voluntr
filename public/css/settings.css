@@ -5,6 +5,7 @@ body {
   --primary-fg-color: rgb(28, 40, 51);
   --pri-bg-color: rgba(31, 0, 110, 1);
   --grey: rgba(50, 50, 50, .85);
+  --light-grey: rgba(150, 150, 150, .2);
   --selection-background: #005ccc !important;
   --selection-color: #ffffff !important;
 
@@ -26,7 +27,7 @@ body {
   /* typography */
 
   --text-base-size: 1em;
-  --text-scale-ratio: 1.15;
+  --text-scale-ratio: 1.2;
 
   --text-xs: calc(1em / (var(--text-scale-ratio) * var(--text-scale-ratio)));
   --text-sm: calc(1em / var(--text-scale-ratio));
