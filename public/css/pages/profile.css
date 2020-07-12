@@ -1,0 +1,25 @@
+@import "../settings.css";
+@import "../generic.css";
+@import "../elements.css";
+@import "../utilities.css";
+@import "../components/header.css";
+@import "../components/form.css";
+@import "../components/signup-form.css";
+@import "../components/tag.css";
+@import "../components/error.css";
+
+.profile {
+  padding: 1em 2em;
+  display: flex;
+  justify-content: center;
+}
+
+.profile label {
+  margin-right: 1em;
+}
+
+@media screen and (max-width: 44em) { 
+  .profile label {
+    margin-right: 0;
+  }
+}

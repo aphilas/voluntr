@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Home</title>
+
+  <link rel="stylesheet" href="./css/pages/profile.css">
+  <script src="./js/profile.js" type="module" defer></script>
+</head>
+<body>
+  <header class="header">
+    <p class="header-title">Voluntr</p>
+
+    <input type="checkbox" id="menu">
+    <label for="menu" onclick></label> <!-- ios hack -->
+
+    <nav class="nav" role="off-canvas">
+      <ul class="nav-ul">
+        <li><a href="./index.html">Home</a></li>
+        <li><a href="./applications.html">Applications</a></li>
+        <li><a href="./saved-jobs.html">Saved jobs</a></li>
+        <li><a href="./profile.html">Profile</a></li>
+        <li><a href="./about.html">About</a></li>
+      </ul>
+    </nav>
+
+    <!-- <div class="header-auth">
+      <ul>
+        <li>
+          <a href="./login.html">
+            <button class="t-btn primary">Log In</button>
+          </a>
+        </li>
+        <li>Sign Up</li>
+      </ul>
+    </div> -->
+  </header>
+
+  <main class="main">
+    <h1 class="text--center">Profile</h1>
+
+    <section class="profile">
+      <form class="signup-form">
+        <div class="field-wrapper">
+          <label for="fname">First Name </label>
+          <input type="text" name="fname" id="fname" placeholder="Jake" class="t-inp solid">
+        </div>
+        
+        <div class="field-wrapper">
+          <label for="lname">Last Name </label>
+          <input type="text" name="lname" id="lname" placeholder="Knapp" class="t-inp solid">
+        </div>
+
+        <div class="field-wrapper">
+          <label for="lname">Skill </label>
+          <select name="skills" id="skill" class="t-sel">
+            <option value="coding" selected>Coding</option>
+            <option value="design">Design</option>
+            <option value="health">Health</option>
+            <option value="finance">Finance</option>
+            <option value="law">Law</option>
+            <option value="engineering">Engineering</option>
+            <option value="training">Training</option>
+          </select>
+        </div>
+    
+        <div class="field-wrapper">
+          <label for="email">Email </label>
+          <input type="email" name="email" id="email" placeholder="jackdoe@mail.com" class="t-inp solid">
+        </div>
+
+        <!-- <div class="field-wrapper">
+          <label for="password">Password </label>
+          <input type="password" name="password" id="password" placeholder="xHyVYDh7xbK&" class="t-inp solid">
+        </div> -->
+    
+        <!-- <div class="signup-form-submit">
+          <input class="t-btn outline" type="submit" value="Sign Up">
+        </div> -->
+      </form>
+    </section>
+  </main>
+
+</body>
+</html>
