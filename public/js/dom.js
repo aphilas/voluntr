@@ -55,21 +55,32 @@ const sel = (selector, root = document) => root.querySelector(selector)
  * @param {item} item
  */
 
+
+/**
+ * 
+ * @typedef {Object} ListEventListener  
+ * @property {string} event
+ * @property {function} caller
+ *
+ */
+
 /**
  * Render a number of jobs into the UI
  * @param {object[]} list List of data to render
  * @param {Node} parentEl
  * @param {Node} rootEl
- * @param {renderCallback} fn Function to call for each item
+ * @param {renderCallback} fn Function to call for each item, called with params el, item
+ * @param {ListEventListener[]} [rootEventListeners] Event listeners to add to root
  * @returns {void}
  */
-const renderList = (list, parentEl, rootEl, fn) => {
+const renderList = (list, parentEl, rootEl, fn, rootEventListeners = []) => {
   if (typeof rootEl === 'string') rootEl = document.createElement(rootEl)
 
   const docFrag = document.createDocumentFragment()
   
   for (const item of list) {
     const el = rootEl.cloneNode()
+    rootEventListeners.forEach(({ event, listener }) => el.addEventListener(event, listener))
     fn(el, item)
     docFrag.appendChild(el)
   }
@@ -80,8 +91,9 @@ const renderList = (list, parentEl, rootEl, fn) => {
   return parentEl
 }
 
-const jobTemplateFn = ({ jobId, jobName, orgName, skills, posted, expiry, saved }) => {
-  const parseDate = dateString => new Date(dateString).toLocaleDateString()
+const parseDate = dateString => new Date(dateString).toLocaleDateString()
+
+const jobTemplate = ({ jobId, jobName, orgName, skills, posted, expiry, saved }) => {
 
   return `
     <div class="title-skill">
@@ -199,3 +211,5 @@ const disableFormInputs = form => {
   const inputs = Array.from(form.elements)
   inputs.forEach(input => input.setAttribute('disabled', 'disabled'))
 }
+
+export { renderList, jobTemplate, aplTemplate, h, sel, scrolledDown, infiniteScrolling, Error, parseDate, disableFormInputs }
