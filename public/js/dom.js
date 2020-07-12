@@ -170,4 +170,32 @@ const Error = (parent) => {
   }
 }
 
-export { renderList, jobTemplateFn, h, sel, scrolledDown, infiniteScrolling, Error }
+const aplTemplate = ({ jobName, skills, orgName, submitted, appStatus }) => {
+  const labels = {
+    pending: 'warn',
+    approved: 'safe',
+    rejected: 'danger',
+    inactive: 'danger',
+  }
+
+  return `
+    <div class="row">
+      <h3>${jobName}</h3>
+      <div class="tag">#${skills}</div>
+    </div>
+
+    <div class="row">
+      <p class="sub-title">${orgName}</p>
+    </div>
+
+    <div class="row">
+      <p class="meta">submitted - <span>${parseDate(submitted)}</span></p>
+      <div class="label ${labels[appStatus]}">${appStatus}</div>
+    </div>
+`
+}
+
+const disableFormInputs = form => {
+  const inputs = Array.from(form.elements)
+  inputs.forEach(input => input.setAttribute('disabled', 'disabled'))
+}
