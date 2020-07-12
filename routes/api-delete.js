@@ -1,6 +1,6 @@
-import { deleteJob } from '../lib/db.js'
+import { deleteJob } from '../db/db.js'
 import { writeResData } from '../lib/server.js'
-import { deleteSavedJob } from '../lib/db.js'
+import { deleteSavedJob } from '../db/db.js'
 import { parseRequestJson } from '../lib/parse-request.js'
  
 async function delSaved (req, res) {

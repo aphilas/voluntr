@@ -1,7 +1,7 @@
 import { writeResData } from '../lib/server.js'
 import { parseRequestJson } from '../lib/parse-request.js'
-import { updateJob } from '../lib/db.js'
-import { updateJobStatus } from '../lib/db.js'
+import { updateJob } from '../db/db.js'
+import { updateJobStatus } from '../db/db.js'
 
 async function putJob(req, res, { id } = {}) {
   const {  jobName, orgId, skills, jobDesc, jobStatus, expiry, } = await parseRequestJson(req)

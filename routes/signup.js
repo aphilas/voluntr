@@ -1,5 +1,5 @@
 import { parseRequestJson } from '../lib/parse-request.js'
-import { insertUser, getUserByEmail } from '../lib/db.js'
+import { insertUser, getUserByEmail } from '../db/db.js'
 import { readCookies, setCookies } from '../lib/cookies.js'
 import { setHeaders } from '../lib/server.js'
 import { hashString } from '../lib/auth.js'
