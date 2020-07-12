@@ -1,13 +1,12 @@
 import { loadEnv } from './env.js'
-loadEnv()
-
 import http from 'http'
 import pathParser from 'path'
 import urlParser from 'url'
 import { staticServer } from './lib/server.js'
 import { router } from './routes/routes.js'
 
-const port = parseInt(process.argv[2]) || 8080
+loadEnv()
+const port = parseInt(process.env.PORT) || 8080
 const publicDir = 'public/'
 
 const server = http.createServer()

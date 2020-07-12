@@ -5,7 +5,7 @@ import { setHeaders } from '../lib/server.js'
 import { hashString } from '../lib/auth.js'
 import { paramsError, dbError, signupEmailError } from '../util/errors.js'
 
-const baseUrl = process.argv[4]
+const baseUrl = process.env.BASE_URL
 
 export default async function(req, res) {
   const { fname, lname, skills, email, password } = await parseRequestJson(req)

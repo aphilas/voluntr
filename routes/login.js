@@ -5,7 +5,7 @@ import { getUserByEmail } from '../lib/db.js'
 import { hashEqual, encodeJWT, hashString } from '../lib/auth.js'
 import { loginEmailError, loginPasswordError, paramsError } from '../util/errors.js'
 
-const baseUrl = process.argv[4]
+const baseUrl = process.env.BASE_URL
 
 export default async function(req, res, options = {}) {
   const { email, password } = await parseRequestJson(req)

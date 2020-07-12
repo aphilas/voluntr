@@ -1,6 +1,8 @@
 import fs from 'fs'
 
 const loadEnv = _ => {
+  if (!fs.existsSync('./env.json')) return
+
   const file = fs.readFileSync('./env.json', { encoding: 'utf-8' })
   const config = JSON.parse(file)
 
