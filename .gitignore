@@ -1,2 +1,4 @@
 node_modules/
 env.json
+db/migrate.sql
+db/seed.sql
