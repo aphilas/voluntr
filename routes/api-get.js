@@ -41,32 +41,32 @@ const getJobs = async (req, res, { status, id } = {}, type) => {
       break
   }
 
-  writeResData(res, data)
+  writeResData(res, { success: true, data })
 }
 
 /** applications */
 
 const getApls = async (req, res, { id, userId, jobId } = {}, type) => {
-  let data
+  let dbRes
 
   switch (type) {
     case 'id':
-      data = await getApplication(id)
+      dbRes = await getApplication(id)
       break
     case 'user':
-      data = await getApplicationsByUser(id)
+      dbRes = await getApplicationsByUser(id)
       break
     case 'user-job':
-      data = await getApplicationsByUserJob(userId, jobId)
+      dbRes = await getApplicationsByUserJob(userId, jobId)
       break
     case 'job':
-      data = await getApplicationsByJob(id)
+      dbRes = await getApplicationsByJob(id)
       break
     default:
       break
   }
 
-  writeResData(res, data)
+  writeResData(res, { success: true, data: dbRes })
 }
 
 /** saved jobs */
@@ -85,4 +85,13 @@ const getSaved = async (req, res, { id }  = {}, type) => {
   writeResData(res, data)
 }
 
-export { getSaved, getApls, getJobs }
+/** get user */
+
+const getUser = async ( req, res, { id } = {}) => {
+  const user = await getById.user(id)
+  const response = { success: true, ...user }
+
+  writeResData(res, response)
+}
+
+export { getSaved, getApls, getJobs, getUser }
