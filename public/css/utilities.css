@@ -6,3 +6,19 @@
   display: flex;
   justify-content: space-between;
 }
+
+.text--center {
+  text-align: center;
+}
+
+.tip-title {
+  text-transform: uppercase;
+  color: var(--light-grey);
+  font-size: x-small;
+  /* font-weight: 500; */
+}
+
+.plain-list {
+  list-style-type: none;
+  padding-left: 0;
+}
