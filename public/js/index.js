@@ -1,14 +1,27 @@
 import { objToCamel, parseJwt, parseCookies, queryServer, debounce } from './utils.js'
-import { renderList, jobTemplateFn, h, sel, infiniteScrolling, Error } from './dom.js'
+import { renderList, jobTemplate, h, sel, infiniteScrolling, Error } from './dom.js'
+import { baseUrl } from './config.js'
 
 const ulEl = sel('.jobs > ul')
 const liEl = h('li', { class: 'job' })
 
 const renderJobs = jobs => renderList(jobs, ulEl, liEl, (el, job) => {
   el.dataset.jobId = job.jobId
-  el.innerHTML = jobTemplateFn(job)
+  el.innerHTML = jobTemplate(job)
   sel('.save', el).addEventListener('click', debounce(saveJob, 50))
-})
+},
+[{
+  event: 'click',
+  listener(event) {
+    // event.stopPropagation()
+    const tag = event.target.tagName
+    if ( tag == 'svg' || tag == 'path') return // heart  
+
+    const currentTarget = event.currentTarget || this
+    const jobId = currentTarget.dataset.jobId
+    document.location.assign(baseUrl + `/job.html?job-id=${jobId}`)
+  }
+}])
 
 /**
  * Save job handler
@@ -32,7 +45,7 @@ async function saveJob (event) {
 
 const init = (async () => {
   const res = await queryServer('GET', '/api/jobs/status/running')
-  const { success, error, message } = res
+  const { success, error, message, data } = res
 
   if (success === false) {
     let errorEL
@@ -45,6 +58,6 @@ const init = (async () => {
     return
   }
 
-  const jobs = res.map(job => objToCamel(job))
+  const jobs = data.map(job => objToCamel(job))
   infiniteScrolling(jobs, 20, 5, renderJobs)
 })()

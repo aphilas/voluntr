@@ -1,16 +1,31 @@
 import { objToCamel, parseJwt, parseCookies, queryServer, debounce } from './utils.js'
-import { renderList, jobTemplateFn, h, sel, infiniteScrolling, Error } from './dom.js'
+import { renderList, jobTemplate, h, sel, infiniteScrolling, Error } from './dom.js'
+import { baseUrl } from './config.js'
 
 const ulEl = sel('.jobs > ul')
 const liEl = h('li', { class: 'job' })
+
+ulEl.innerHTML = '' // clear ul
 
 const state = { }
 
 const renderJobs = jobs => renderList(jobs, ulEl, liEl, (el, job) => {
   el.dataset.jobId = job.jobId
-  el.innerHTML = jobTemplateFn(job)
+  el.innerHTML = jobTemplate(job)
   sel('.save', el).addEventListener('click', debounce(saveJob, 50))
-})
+},
+[{
+  event: 'click',
+  listener(event) {
+    // event.stopPropagation()
+    const tag = event.target.tagName
+    if ( tag == 'svg' || tag == 'path') return // heart  
+
+    const currentTarget = event.currentTarget || this
+    const jobId = currentTarget.dataset.jobId
+    document.location.assign(baseUrl + `/job.html?job-id=${jobId}`)
+  }
+}])
 
 /**
  * Save job handler
