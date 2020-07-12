@@ -1,14 +1,17 @@
-import { router } from './routes.js'
 import { writeResData } from '../lib/server.js'
 import { parseRequestJson } from '../lib/parse-request.js'
 import { insertApplication } from '../lib/db.js'
 import { insertSavedJob } from '../lib/db.js'
 import { insertJob } from '../lib/db.js'
+import { paramsError } from '../util/errors.js'
 
 async function postApl(req, res) {
   const { userId, jobId, appDesc } = await parseRequestJson(req)
 
-  if (!userId || !jobId || !appDesc) writeResData(res, { success: false, message: 'missing values' })
+  if (!userId || !jobId || !appDesc) {
+    writeResData(res, JSON.parse(paramsError()))
+    return
+  }
 
   try {
     if (await insertApplication(...Object.values(req.body))) {
