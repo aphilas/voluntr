@@ -5,6 +5,10 @@
   margin-bottom: var(--space-lg);
 }
 
+.job:hover {
+  box-shadow: var(--box-shadow);
+}
+
 .title-skill {
   display: flex;
   justify-content: space-between;
