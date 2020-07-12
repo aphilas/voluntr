@@ -1,8 +1,8 @@
 import { parseRequestJson } from '../lib/parse-request.js'
 import { setCookies, readCookies } from '../lib/cookies.js'
-import { setHeaders } from '../lib/server.js'
+import { setHeaders, redirect } from '../lib/server.js'
 import { getUserByEmail } from '../lib/db.js'
-import { hashEqual, encodeJWT, hashString } from '../lib/auth.js'
+import { hashEqual, encodeJWT } from '../lib/auth.js'
 import { loginEmailError, loginPasswordError, paramsError } from '../util/errors.js'
 
 const baseUrl = process.env.BASE_URL

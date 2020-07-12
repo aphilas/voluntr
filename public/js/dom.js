@@ -212,4 +212,4 @@ const disableFormInputs = form => {
   inputs.forEach(input => input.setAttribute('disabled', 'disabled'))
 }
 
-export { renderList, jobTemplate, aplTemplate, h, sel, scrolledDown, infiniteScrolling, Error, parseDate, disableFormInputs }
+      h('a', { href: `./login.html?redirect=${encodeURI(document.location.href)}` }, 'Log In'),
