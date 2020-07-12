@@ -1,5 +1,5 @@
 import { objToCamel, parseJwt, parseCookies, queryServer, debounce } from './utils.js'
-import { renderList, jobTemplate, h, sel, infiniteScrolling, Error } from './dom.js'
+import { renderList, jobTemplate, h, sel, infiniteScrolling, Error, appendError } from './dom.js'
 import { baseUrl } from './config.js'
 
 const ulEl = sel('.jobs > ul')
@@ -48,13 +48,7 @@ const init = (async () => {
   const { success, error, message, data } = res
 
   if (success === false) {
-    let errorEL
-    if (error == 'Authentication Error') {
-      errorEl = h('Please ', h('a', { href: './login.html' }, 'Log In'), 'to continue')
-    }
-
-    const container = sel('main').appendChild(h('div'))
-    const domError = Error(container).append(errorEl ? errorEL : message ) 
+    appendError({ error, message })
     return
   }
 

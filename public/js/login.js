@@ -2,6 +2,7 @@ import { baseUrl } from '../js/config.js'
 import { formDataObj } from './utils.js'
 
 const loginForm = document.querySelector('.form.login')
+const redirectUrl = decodeURI(new URL(document.location.href).searchParams.get('redirect'))
 
 const loginRequest = async (formData) => {
   const url = baseUrl + '/login'
@@ -25,7 +26,7 @@ const loginRequest = async (formData) => {
   }
 
   if (success === true) {
-    window.location.assign(redirect)
+    window.location.assign(redirectUrl || baseUrl)
   }
 }
 

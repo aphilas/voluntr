@@ -1,10 +1,11 @@
-import { sel, Error, disableFormInputs } from './dom.js'
+import { sel, Error, disableFormInputs, appendError } from './dom.js'
 import { queryServer, parseCookies, parseJwt } from './utils.js'
 
 const form = sel('.profile > form')
 disableFormInputs(form)
 
 const updateForm = (user) => {
+  const inputs = form.elements
   for (const input of inputs) {
     input.value = user[input.name]
   }
@@ -12,13 +13,19 @@ const updateForm = (user) => {
 
 const init = (async () => {
   const { token } = parseCookies(document.cookie)
+
+  if (!token) {
+    sel('.profile').innerHTML = ''
+    appendError({ error: 'Authentication Error' })
+    return
+  }
+
   const { id: userId } = parseJwt(token)
   const res = await queryServer('GET', `/api/user/${ userId }`)
   const { success, error, message } = res
 
   if (success === false) {
-    const container = sel('main').appendChild(h('div'))
-    Error(container).append(message) 
+    appendError({ error, message })
     return
   }
 

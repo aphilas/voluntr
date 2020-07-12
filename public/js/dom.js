@@ -212,4 +212,26 @@ const disableFormInputs = form => {
   inputs.forEach(input => input.setAttribute('disabled', 'disabled'))
 }
 
+/**
+ * Append an error element to the .main element
+ * @param {object} error
+ * @property {string} [error] 
+ * @property {string} message
+ * @returns {object} Error object
+ * 
+ */
+const appendError = ({ error = 'Error', message = 'There was an error processing your request' } = {}) => {
+  let el
+
+  if (error == 'Authentication Error') {
+    el = h( 'span', {}, 'Please ', 
       h('a', { href: `./login.html?redirect=${encodeURI(document.location.href)}` }, 'Log In'),
+      ' to continue' )
+  }
+
+  const container = sel('.main').appendChild(h('div'))
+  const errorObj = Error(container).append(el ? el : message ) 
+  return errorObj
+}
+
+export { renderList, jobTemplate, aplTemplate, h, sel, scrolledDown, infiniteScrolling, Error, parseDate, disableFormInputs, appendError }

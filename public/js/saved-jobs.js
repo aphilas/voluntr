@@ -1,5 +1,5 @@
 import { objToCamel, parseJwt, parseCookies, queryServer, debounce } from './utils.js'
-import { renderList, jobTemplate, h, sel, infiniteScrolling, Error } from './dom.js'
+import { renderList, jobTemplate, h, sel, infiniteScrolling, appendError } from './dom.js'
 import { baseUrl } from './config.js'
 
 const ulEl = sel('.jobs > ul')
@@ -47,6 +47,12 @@ async function saveJob (event) {
 
 const init = (async () => {
   const { token } = parseCookies(document.cookie)
+
+  if (!token) {
+    appendError({ error: 'Authentication Error' })
+    return
+  }
+
   const { id: userId } = parseJwt(token)
   state.userId = userId
 
@@ -54,13 +60,7 @@ const init = (async () => {
   const { success, error, message } = res
 
   if (success === false) {
-    let errorEL
-    if (error == 'Authentication Error') {
-      errorEl = h('Please ', h('a', { href: './login.html' }, 'Log In'), 'to continue')
-    }
-
-    const container = sel('main').appendChild(h('div'))
-    const domError = Error(container).append(errorEl ? errorEL : message ) 
+    appendError({ error: 'Authentication Error' })
     return
   }
 
