@@ -5,5 +5,7 @@
   padding: .5em 1.5em;
   font-size: small;
   font-weight: 500;
+  display: inline-block;
   margin: 0;
+  /* flex-basis: content; */
 }
