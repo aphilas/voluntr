@@ -13,8 +13,7 @@ const loginRequest = async (formData) => {
   }
 
   const response = await fetch(url, options)
-  const { success, redirect = baseUrl + '/login.html', error, message } = await response.json()
-  // console.log({ success, redirect, error, message })
+  const { success, redirect = baseUrl + '/index.html', error, message } = await response.json()
 
   if (success === false) {
     document.getElementsByTagName('main')[0].appendChild((_ => {
@@ -25,7 +24,7 @@ const loginRequest = async (formData) => {
     })())
   }
 
-  if (success) {
+  if (success === true) {
     window.location.assign(redirect)
   }
 }
