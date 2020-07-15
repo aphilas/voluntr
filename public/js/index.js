@@ -1,5 +1,5 @@
 import { objToCamel, parseJwt, parseCookies, queryServer, debounce } from './utils.js'
-import { renderList, jobTemplate, h, sel, infiniteScrolling, Error, appendError } from './dom.js'
+import { renderList, jobTemplate, jobTemplateOrg, h, sel, infiniteScrolling, appendError } from './dom.js'
 import { baseUrl } from './config.js'
 
 const ulEl = sel('.jobs > ul')
@@ -44,6 +44,19 @@ async function saveJob (event) {
 }
 
 const init = (async () => {
+  const { token } = parseCookies(document.cookie)
+  if (!token) {
+    appendError({ error: 'Authentication Error' })
+    return
+  }
+
+  const { id, rol: role } = parseJwt(token)
+
+  if (role == 'org') {
+    window.location.assign(baseUrl + '/org-jobs.html')
+    return
+  }
+
   const res = await queryServer('GET', '/api/jobs/status/running')
   const { success, error, message, data } = res
 
