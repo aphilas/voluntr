@@ -11,7 +11,9 @@
   "license": "ISC",
   "type": "module",
   "dependencies": {
-    "pg": "^8.0.2",
-    "sqlite": "^3.0.3"
+    "pg": "^8.3.0"
+  },
+  "engines": {
+    "node": "14.x"
   }
 }
