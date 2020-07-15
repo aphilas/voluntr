@@ -19,3 +19,18 @@
   padding-left: 0;
   list-style-type: none;
 }
+
+.add-job {
+  text-decoration: none;
+  border-radius: 5em !important;
+  /* margin-top: 1em; */
+}
+
+.fab {
+  z-index: 5;
+  position: fixed;
+  bottom: 2.5em;
+  left: 70%;
+}
+
+
