@@ -119,6 +119,21 @@ const jobTemplate = ({ jobId, jobName, orgName, skills, posted, expiry, saved })
   `
 }
 
+const jobTemplateOrg = ({ jobId, jobName, orgName, skills, posted, expiry, saved }) => {
+  return `
+    <div class="title-skill">
+      <h3 class="title">${ jobName }</h3>
+      <p class="skill tag">#${ skills }</p>
+    </div>
+
+    <div class="job-meta">
+      <p class="time posted"><span>POSTED - </span> <span>${ parseDate(posted) }</span> </p>
+      <p class="time expires"><span>EXPIRES - </span> <span>${ parseDate(expiry) }</span> </p>
+      <!-- <button class="t-btn primary apply" data-job-id="${ jobId }">Details</button> -->
+    </div>
+  `
+}
+
 const scrolledDown = (_ => {
   let prev
   return () => {
