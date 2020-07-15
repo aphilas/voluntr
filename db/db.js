@@ -125,6 +125,8 @@ const getJobsByStatus = (_ => {
           LEFT OUTER JOIN organization 
             ON job.org_id = organization.org_id
           WHERE job.job_status = '${ status }'
+          ORDER BY
+            job.job_id DESC
         `,
         values: [ userId ]
       })
@@ -290,7 +292,9 @@ const getApplicationsByUser = async (userId) => {
         ON application.job_id = job.job_id
       LEFT OUTER JOIN organization
         ON job.org_id = organization.org_id
-      WHERE "user".user_id = $1    
+      WHERE "user".user_id = $1   
+      ORDER BY
+        application.app_id DESC 
       `
       ,
       values: [ userId ],
@@ -321,6 +325,8 @@ const getJobsByOrg = async (orgId) => {
       LEFT OUTER JOIN organization 
         ON job.org_id = organization.org_id
       WHERE job.org_id = $1
+      ORDER BY
+        job.job_id DESC
       `
       ,
       values: [ orgId ]
@@ -384,11 +390,16 @@ const getApplicationsByJob = async (jobId) => {
       SELECT 
         application.app_id,
         application.user_id,
+        application.app_desc,
+        application.submitted,
+        application.app_status,
         "user".fname,
         "user".lname,
+        "user".skills as user_skills,
         job.job_id,
         job.job_name,
         job.job_status,
+        job.skills,
         job.expiry,
         organization.org_id,
         organization.org_name
@@ -400,6 +411,8 @@ const getApplicationsByJob = async (jobId) => {
       LEFT OUTER JOIN organization
         ON job.org_id = organization.org_id
       WHERE application.job_id = $1
+      ORDER BY
+        application.app_id DESC
       `
       ,
       values: [ jobId ]
@@ -412,8 +425,8 @@ const getApplicationsByJob = async (jobId) => {
   }
 }
 
-const updateApplicationStatus = appId => {
-  const set = async (newStatus) => {
+const updateAplStatus = (_ => {
+  const set = async (newStatus, appId) => {
     try {
       const res = await pool.query({
         text: 
@@ -432,12 +445,12 @@ const updateApplicationStatus = appId => {
   }
 
   return {
-    approve: _ => set('approved'), 
-    pending: _ => set('pending'), 
-    reject: _ => set('rejected'), 
-    deactivate: _ => set('inactive'), 
+    approve: appId => set('approved', appId), 
+    pending: appId => set('pending', appId), 
+    reject: appId => set('rejected', appId), 
+    deactivate: appId => set('inactive', appId), 
   }
-}
+})()
 
 const oneMonthFromNow = _ => {
   const date = new Date()
@@ -445,16 +458,16 @@ const oneMonthFromNow = _ => {
   return date
 }
 
-const insertJob = async ( jobName, orgId, skills, jobDesc, expiry = oneMonthFromNow().toISOString(), lat = -1.292066, lon = 36.821945 ) => {
+const insertJob = async ( jobName, orgId, skills, jobDesc, jobStatus = 'running', expiry = oneMonthFromNow().toISOString(), lat = -1.292066, lon = 36.821945 ) => {
   try {
     const res = await pool.query({
       text: 
       `
         INSERT INTO job (job_id, job_name, org_id, skills, job_desc, job_status, posted, expiry, lat, lon)
-          VALUES (${ await getLargestId.jobs() + 1 }, $1, $2, $3, $4, DEFAULT, DEFAULT, $5, $6, $7 )
+          VALUES (${ await getLargestId.jobs() + 1 }, $1, $2, $3, $4, $5, DEFAULT, $6, $7, $8)
       `
       ,
-      values: [ jobName, orgId, skills, jobDesc, expiry, lat, lon ]
+      values: [ jobName, orgId, skills, jobDesc, jobStatus, expiry, lat, lon ]
     })
 
     return res.rowCount === 1
@@ -598,6 +611,8 @@ const getApplicationsByUserJob = async (userId, jobId) => {
             application.user_id = $1
           AND
             application.job_id = $2
+          ORDER BY
+            application.app_id DESC
         `,
       values: [ userId, jobId ],
     })
@@ -653,6 +668,15 @@ const getApplication = async (appId) => {
   }
 }
 
+/**
+ * Save user
+ * @param {sting} fname 
+ * @param {sting} lname 
+ * @param {sting} skills 
+ * @param {sting} email 
+ * @param {sting} passw 
+ * @returns {object}
+ */
 const insertUser = async ( fname, lname, skills, email, passw ) => {
   try {
     const res = await pool.query({
@@ -672,6 +696,38 @@ const insertUser = async ( fname, lname, skills, email, passw ) => {
   }
 }
 
+/**
+ * Save org
+ * @param {string} orgName 
+ * @param {string} about 
+ * @param {string} email 
+ * @param {string} passw 
+ * @returns {boolean} success of operation
+ */
+const insertOrg = async (orgName, about, email, passw) => {
+  try {
+    const res = await pool.query({
+      text: 
+      `
+        INSERT INTO organization (org_id, org_name, about, email, passw)
+          VALUES (${ await getLargestId.organizations() + 1 }, $1, $2, $3, $4)
+      `
+      ,
+      values: [ orgName, about, email, passw ]
+    })
+
+    return res.rowCount === 1
+  } catch (err) {
+    console.error(err)
+    return false
+  }
+}
+
+/**
+ * Get a user
+ * @param {email} email Users's email
+ * @returns {object} user
+ */
 const getUserByEmail = async (email) => {
   try {
     const res = await pool.query({
@@ -679,6 +735,30 @@ const getUserByEmail = async (email) => {
       `
         SELECT * FROM "user"
           WHERE "user".email = $1
+      `
+      ,
+      values: [ email ]
+    })
+
+    return res.rows[0]
+  } catch (err) {
+    console.error(err)
+    return false
+  }
+}
+
+/**
+ * Get an organization by email
+ * @param {email} email Organizations's email
+ * @returns {object} org
+ */
+const getOrgByEmail = async (email) => {
+  try {
+    const res = await pool.query({
+      text: 
+      `
+        SELECT * FROM organization
+          WHERE organization.email = $1
       `
       ,
       values: [ email ]
@@ -717,6 +797,9 @@ export {
   insertUser,
   getUserByEmail,
 
+  getOrgByEmail,
+  insertOrg,  
+
   insertJob, 
   getJob,
   getJobsByStatus, 
@@ -735,6 +818,6 @@ export {
   getApplication,
   getApplicationsByUser, 
   getApplicationsByJob,
-  updateApplicationStatus, 
+  updateAplStatus, 
   applicationAuthorized 
 }

@@ -1,5 +1,18 @@
 import { throttle, StepWise } from './utils.js'
 
+const aplLabels = {
+  pending: 'warn',
+  approved: 'safe',
+  rejected: 'danger',
+  inactive: 'danger',
+}
+
+const jobLabels = {
+  running: 'safe',
+  deleted: 'danger',
+  inactive: 'danger',
+}
+
 /**
  * JSX-like helper to create elements
  * @param {string} tag Element tag name
@@ -119,6 +132,21 @@ const jobTemplate = ({ jobId, jobName, orgName, skills, posted, expiry, saved })
   `
 }
 
+const jobTemplateOrg = ({ jobId, jobName, orgName, skills, posted, expiry, saved }) => {
+  return `
+    <div class="title-skill">
+      <h3 class="title">${ jobName }</h3>
+      <p class="skill tag">#${ skills }</p>
+    </div>
+
+    <div class="job-meta">
+      <p class="time posted"><span>POSTED - </span> <span>${ parseDate(posted) }</span> </p>
+      <p class="time expires"><span>EXPIRES - </span> <span>${ parseDate(expiry) }</span> </p>
+      <!-- <button class="t-btn primary apply" data-job-id="${ jobId }">Details</button> -->
+    </div>
+  `
+}
+
 const scrolledDown = (_ => {
   let prev
   return () => {
@@ -207,6 +235,35 @@ const aplTemplate = ({ jobName, skills, orgName, submitted, appStatus }) => {
 `
 }
 
+const aplTemplateOrg = ({ fname, lname, submitted, appStatus, appDesc, jobName, jobStatus, expiry, userSkills }) => {
+  return `
+    <div class="row">
+      <h3>${fname} ${lname}</h3>
+      <div class="tag">#${userSkills}</div>
+    </div>
+
+    <!-- <div class="row">
+      <p class="sub-title">${jobName}</p>
+      <p class="meta" style="align-self: center;">expiry - <span>${parseDate(expiry)}</span></p>
+      <div class="label ${jobLabels[jobStatus]}">${jobStatus}</div>
+    </div>  -->
+
+    <div class="row desc">
+      <p>${appDesc}</p>
+    </div>
+
+    <div class="row">
+      <p class="meta">submitted - <span>${parseDate(submitted)}</span></p>
+      <div class="label ${aplLabels[appStatus]} app-status">${appStatus}</div>
+    </div>
+
+    <div class="row buttons">
+      <button class="t-btn primary approve">Approve</button>
+      <button class="t-btn primary reject">Reject</button>
+    </div>
+`
+}
+
 const disableFormInputs = form => {
   const inputs = Array.from(form.elements)
   inputs.forEach(input => input.setAttribute('disabled', 'disabled'))
@@ -234,4 +291,4 @@ const appendError = ({ error = 'Error', message = 'There was an error processing
   return errorObj
 }
 
-export { renderList, jobTemplate, aplTemplate, h, sel, scrolledDown, infiniteScrolling, Error, parseDate, disableFormInputs, appendError }
+export { renderList, jobTemplate, jobTemplateOrg, aplTemplate, aplTemplateOrg, h, sel, scrolledDown, infiniteScrolling, Error, parseDate, disableFormInputs, appendError, aplLabels, jobLabels }

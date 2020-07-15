@@ -14,7 +14,7 @@ const signupEmailError = _ => JSON.stringify({
 const loginEmailError = _ => JSON.stringify({
   success: false,
   error: 'Login Email Error',
-  message: 'No user with that email exists'
+  message: 'No user or organization with that email exists'
 })
 
 const loginPasswordError = _ => JSON.stringify({

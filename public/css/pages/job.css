@@ -26,23 +26,6 @@
   padding: 0;
 }
 
-textarea {
-  padding: .5rem 1rem;
-  border: 1px solid rgba(255, 255, 255, 0);
-  border-radius: 5px;
-  background: rgba(150, 150, 150, .1);
-
-  width: 100%;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-}
-
-textarea, label {
-  display: block;
-  margin-bottom: var(--space-sm);
-}
-
 .applied {
   margin-bottom: var(--space-sm);
 }

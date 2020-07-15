@@ -89,9 +89,16 @@ const getSaved = async (req, res, { id }  = {}, type) => {
 
 const getUser = async ( req, res, { id } = {}) => {
   const user = await getById.user(id)
-  const response = { success: true, ...user }
+  const response = { success: true, data: user }
 
   writeResData(res, response)
 }
 
-export { getSaved, getApls, getJobs, getUser }
+const getOrg = async ( req, res, { id } = {}) => {
+  const org = await getById.organization(id)
+  const response = { success: true, data: org }
+
+  writeResData(res, response)
+}
+
+export { getSaved, getApls, getJobs, getUser, getOrg }

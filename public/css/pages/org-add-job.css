@@ -5,32 +5,31 @@
 @import "../components/header.css";
 @import "../components/form.css";
 @import "../components/tag.css";
-@import "../components/job-card.css";
-@import "../components/heart.css";
+@import "../components/label.css";
+@import "../components/card.css";
 @import "../components/error.css";
 
-.jobs {
+.main {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.jobs > ul {
-  padding-left: 0;
-  list-style-type: none;
+.job {
+  /* flex-basis: ; */
+  max-width: 40em;
+  padding: var(--space-md) var(--space-sm);
 }
 
-.add-job {
-  text-decoration: none;
-  border-radius: 5em !important;
-  /* margin-top: 1em; */
+.row h1, .row h2, .row h3 {
+  margin: 0 var(--space-md) 0 0;
+  padding: 0;
 }
 
-.fab {
-  z-index: 5;
-  position: fixed;
-  bottom: 2.5em;
-  left: 70%;
+.applied {
+  margin-bottom: var(--space-sm);
 }
 
-
+#expiry {
+  width: 13.5em;
+}

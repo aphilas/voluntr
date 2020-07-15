@@ -3,6 +3,7 @@
 @import "../elements.css";
 @import "../utilities.css";
 @import "../components/header.css";
+@import "../components/form.css";
 @import "../components/tag.css";
 @import "../components/label.css";
 @import "../components/card.css";
@@ -14,26 +15,26 @@
   align-items: center;
 }
 
-.desc {
-  max-width: 30em;
+.job {
+  /* flex-basis: ; */
+  max-width: 40em;
+  padding: var(--space-md) var(--space-sm);
 }
 
-.buttons button {
-  padding: .5em 1em;
+.row h1, .row h2, .row h3 {
+  margin: 0 var(--space-md) 0 0;
+  padding: 0;
 }
 
-.buttons > :first-child {
-  margin-right: .5em;
+.applied {
+  margin-bottom: var(--space-sm);
 }
 
-.buttons {
-  justify-content: start;
+.apl-link {
+  /* margin-top: var(--space-md); */
+  padding-top: 1em;
 }
 
-.approve {
-  background-color: rgba(0, 150, 0, 1) !important;
-}
-
-.reject {
-  background-color: rgba(220, 50, 0, 1) !important;
+.apl-link > a {
+  text-decoration: none;
 }

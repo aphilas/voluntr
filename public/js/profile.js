@@ -1,13 +1,13 @@
 import { sel, Error, disableFormInputs, appendError } from './dom.js'
-import { queryServer, parseCookies, parseJwt } from './utils.js'
+import { queryServer, parseCookies, parseJwt, objToCamel } from './utils.js'
 
 const form = sel('.profile > form')
 disableFormInputs(form)
 
-const updateForm = (user) => {
+const updateForm = (obj) => {
   const inputs = form.elements
   for (const input of inputs) {
-    input.value = user[input.name]
+    input.value = obj[input.name]
   }
 }
 
@@ -20,8 +20,8 @@ const init = (async () => {
     return
   }
 
-  const { id: userId } = parseJwt(token)
-  const res = await queryServer('GET', `/api/user/${ userId }`)
+  const { id, rol: role } = parseJwt(token)
+  const res = await queryServer('GET', `/api/${role}/${id}`)
   const { success, error, message } = res
 
   if (success === false) {
@@ -29,7 +29,10 @@ const init = (async () => {
     return
   }
 
-  const { fname, lname, skills, email } = res
+  const data = objToCamel(res.data)
 
-  updateForm({ fname, lname, skills, email })
+  // const { fname, lname, skills, email } = data
+  // const { orgName, about, email } = data
+
+  updateForm(data)
 })()
