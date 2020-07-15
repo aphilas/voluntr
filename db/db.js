@@ -653,6 +653,15 @@ const getApplication = async (appId) => {
   }
 }
 
+/**
+ * Save user
+ * @param {sting} fname 
+ * @param {sting} lname 
+ * @param {sting} skills 
+ * @param {sting} email 
+ * @param {sting} passw 
+ * @returns {object}
+ */
 const insertUser = async ( fname, lname, skills, email, passw ) => {
   try {
     const res = await pool.query({
@@ -672,6 +681,11 @@ const insertUser = async ( fname, lname, skills, email, passw ) => {
   }
 }
 
+/**
+ * Get a user
+ * @param {email} email Users's email
+ * @returns {object} user
+ */
 const getUserByEmail = async (email) => {
   try {
     const res = await pool.query({
