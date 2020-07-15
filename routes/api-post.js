@@ -4,11 +4,12 @@ import { insertApplication } from '../db/db.js'
 import { insertSavedJob } from '../db/db.js'
 import { insertJob } from '../db/db.js'
 import { paramsError } from '../util/errors.js'
+import { undef } from '../util/helpers.js'
 
 async function postApl(req, res) {
   const { userId, jobId, appDesc } = await parseRequestJson(req)
 
-  if (!userId || !jobId || !appDesc) {
+  if (undef(userId, jobId, appDesc)) {
     writeResData(res, JSON.parse(paramsError()))
     return
   }
@@ -28,8 +29,8 @@ async function postApl(req, res) {
 async function postSaved(req, res) {
   const { userId, jobId } = await parseRequestJson(req)
 
-  if (!userId || !jobId) {
-    stringifyAndWrite(res, { success: false, message: 'properties userId and/or jobId not found' })
+  if (undef(userId, jobId)) {
+    writeResData(res, { success: false, message: 'properties userId and/or jobId not found' })
   }
 
   try {
@@ -52,28 +53,28 @@ const oneMonthFromNow = _ => {
 
 async function postJob(req, res) {
   const { 
-    jobName, 
-    orgId, 
+    'job-name': jobName, 
+    'org-id': orgId, 
     skills, 
-    jobDesc, 
+    'job-desc': jobDesc, 
     expiry = oneMonthFromNow().toISOString(), 
     lat = -1.292066, 
     lon = 36.821945, 
-  } = await postData(req)
+  } = await parseRequestJson(req)
 
-  if ([jobName, orgId, skills, jobDesc].some(prop => !prop)) {
-    stringifyAndWrite(res, { success: false, message: 'missing values' })
+  if (undef(jobName, orgId, skills, jobDesc)) {
+    writeResData(res, JSON.parse(paramsError()))
     return
   }
 
   try {
-    if (await insertJob(...Object.values(req.body))) {
-      stringifyAndWrite(res, { success: true })
+    if (await insertJob(jobName, orgId, skills, jobDesc, 'running', expiry)) {
+      writeResData(res, { success: true })
     } else {
-      stringifyAndWrite(res, { success: false })
+      writeResData(res, { success: false })
     }
   } catch (err) {
-    stringifyAndWrite(res, { success: false })
+    writeResData(res, { success: false })
     console.error(err)
   }
 }
