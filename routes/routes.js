@@ -3,15 +3,16 @@ import { Router } from '../lib/router.js'
 import postLogin from './login.js'
 import postSignup from './signup.js'
 
-import { getSaved, getApls, getJobs, getUser } from './api-get.js'
+import { getSaved, getApls, getJobs, getUser, getOrg } from './api-get.js'
 import { delJob, delSaved } from './api-delete.js'
 import { postApl, postJob, postSaved } from './api-post.js'
-import { putJob, patchJobStatus } from './api-update.js'
+import { putJob, patchJobStatus, patchAplStatus } from './api-update.js'
 
 const router = Router()
 
 router.addMultiple('get', new Map([
   ['/', (req, res) => serveHtml('public/index.html', res)],
+  ['/api/org/:id', getOrg ],
   ['/api/user/:id', getUser ],
   ['/api/saved-jobs/:id', (req, res, params) => getSaved(req, res, params, 'user') ],
   ['/api/apl/:id', (req, res, params) => getApls(req, res, params, 'id') ],
@@ -42,6 +43,11 @@ router.addMultiple('patch', new Map([
   ['/api/job/:id/activate', patchJobStatus('activate')],
   ['/api/job/:id/deactivate', patchJobStatus('deactivate')],
   ['/api/job/:id/delete', patchJobStatus('delete')],
+
+  ['/api/apl/:id/approve', patchAplStatus('approve')],
+  ['/api/apl/:id/pending', patchAplStatus('pending')],
+  ['/api/apl/:id/reject', patchAplStatus('reject')],
+  ['/api/apl/:id/deactivate', patchAplStatus('deactivate')],
 ]))
 
 router.addMultiple('put', new Map([
