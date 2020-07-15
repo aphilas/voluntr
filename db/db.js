@@ -682,6 +682,33 @@ const insertUser = async ( fname, lname, skills, email, passw ) => {
 }
 
 /**
+ * Save org
+ * @param {string} orgName 
+ * @param {string} about 
+ * @param {string} email 
+ * @param {string} passw 
+ * @returns {boolean} success of operation
+ */
+const insertOrg = async (orgName, about, email, passw) => {
+  try {
+    const res = await pool.query({
+      text: 
+      `
+        INSERT INTO organization (org_id, org_name, about, email, passw)
+          VALUES (${ await getLargestId.organizations() + 1 }, $1, $2, $3, $4)
+      `
+      ,
+      values: [ orgName, about, email, passw ]
+    })
+
+    return res.rowCount === 1
+  } catch (err) {
+    console.error(err)
+    return false
+  }
+}
+
+/**
  * Get a user
  * @param {email} email Users's email
  * @returns {object} user
@@ -693,6 +720,30 @@ const getUserByEmail = async (email) => {
       `
         SELECT * FROM "user"
           WHERE "user".email = $1
+      `
+      ,
+      values: [ email ]
+    })
+
+    return res.rows[0]
+  } catch (err) {
+    console.error(err)
+    return false
+  }
+}
+
+/**
+ * Get an organization by email
+ * @param {email} email Organizations's email
+ * @returns {object} org
+ */
+const getOrgByEmail = async (email) => {
+  try {
+    const res = await pool.query({
+      text: 
+      `
+        SELECT * FROM organization
+          WHERE organization.email = $1
       `
       ,
       values: [ email ]
@@ -730,6 +781,9 @@ export {
 
   insertUser,
   getUserByEmail,
+
+  getOrgByEmail,
+  insertOrg,  
 
   insertJob, 
   getJob,

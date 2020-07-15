@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Voluntr | Sign Up</title>
 
-  <link rel="stylesheet" href="./css/pages/signup.css">
-  <script src="./js/signup.js" type="module" defer></script>
+  <link rel="stylesheet" href="./css/pages/signup-org.css">
+  <script src="./js/signup-org.js" type="module" defer></script>
 </head>
 <body>
   <header class="header">
@@ -40,31 +40,20 @@
   <main>
     <section class="signup content">
       <div class="signup-wrapper">
-        <h2 class="signup-title">Sign Up</h2>
+        <h2 class="signup-title">Sign Up as Org</h2>
       
         <!-- <form method="post" action="http://localhost:8080/signup" class="signup-form"> -->
         <form class="signup-form" method="POST">
           <div class="field-wrapper">
-            <label for="fname">First Name </label>
-            <input type="text" name="fname" id="fname" placeholder="Jake" class="t-inp solid">
+            <label for="org-name">Organization Name </label>
+            <input type="text" name="orgName" id="org-name" placeholder="Wabera CBO" class="t-inp solid">
           </div>
-          
+      
           <div class="field-wrapper">
-            <label for="lname">Last Name </label>
-            <input type="text" name="lname" id="lname" placeholder="Knapp" class="t-inp solid">
-          </div>
-  
-          <div class="field-wrapper">
-            <label for="lname">Skill </label>
-            <select name="skills" id="skill" class="t-sel">
-              <option value="coding" selected>Coding</option>
-              <option value="design">Design</option>
-              <option value="health">Health</option>
-              <option value="finance">Finance</option>
-              <option value="law">Law</option>
-              <option value="engineering">Engineering</option>
-              <option value="training">Training</option>
-            </select>
+            <label for="about">About </label>
+            <div>
+              <textarea name="about" id="about" cols="19" rows="3" placeholder="We work with disadvantaged kids."></textarea>
+            </div>
           </div>
       
           <div class="field-wrapper">
@@ -81,7 +70,7 @@
             <input class="t-btn outline" type="submit" value="Sign Up">
           </div>
 
-          <input type="text" name="role" value="user" hidden>
+          <input type="text" name="role" value="org" hidden>
         </form>
       </div>
     </section>
