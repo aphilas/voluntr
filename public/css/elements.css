@@ -7,6 +7,10 @@ input[type=text], input[type=email], input[type=password] {
   padding: .5em 1em;
 }
 
+input[type=date] { 
+  padding: .25em .5em;
+}
+
 /* typography */
 
 .text--xxxl {
@@ -78,7 +82,7 @@ input[type="text"]:focus.t-inp, input[type="email"]:focus.t-inp, input[type="pas
   border: 1px solid var(--pri-bg-color);
 }
 
-input[type="text"].solid, input[type="email"].solid, input[type="password"].solid {
+input[type="text"].solid, input[type="email"].solid, input[type="password"].solid, input[type=date].solid {
   border: 1px solid rgba(255, 255, 255, 0);
   border-radius: 5px;
   background: rgba(150, 150, 150, .1);
@@ -209,5 +213,9 @@ textarea {
 
 textarea, label {
   display: block;
-  margin-bottom: var(--space-sm);
+  /* margin-bottom: var(--space-xs); */
+}
+
+label {
+  padding-right: var(--space-xs);
 }
