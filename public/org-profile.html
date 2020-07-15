@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Voluntr | Profile</title>
+
+  <link rel="stylesheet" href="./css/pages/profile.css">
+  <script src="./js/profile.js" type="module" defer></script>
+</head>
+<body>
+  <header class="header">
+    <p class="header-title">Voluntr</p>
+
+    <input type="checkbox" id="menu">
+    <label for="menu" onclick></label> <!-- ios hack -->
+
+    <nav class="nav" role="off-canvas">
+      <ul class="nav-ul">
+        <li><a href="./org-jobs.html">Jobs</a></li>
+        <li><a href="./org-profile.html">Profile</a></li>
+        <li><a href="./org-about.html">About</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="main">
+    <h1 class="text--center">Profile</h1>
+
+    <section class="profile">
+      <form class="signup-form" method="POST">
+        <div class="field-wrapper">
+          <label for="org-name">Organization Name </label>
+          <input type="text" name="orgName" id="org-name" placeholder="Wabera CBO" class="t-inp solid">
+        </div>
+    
+        <div class="field-wrapper">
+          <label for="about">About </label>
+          <div>
+            <textarea name="about" id="about" cols="19" rows="3" placeholder="We work with disadvantaged kids."></textarea>
+          </div>
+        </div>
+    
+        <div class="field-wrapper">
+          <label for="email">Email </label>
+          <input type="email" name="email" id="email" placeholder="jackdoe@mail.com" class="t-inp solid">
+        </div>
+      </form>
+    </section>
+  </main>
+
+</body>
+</html>
