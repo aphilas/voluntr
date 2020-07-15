@@ -1,5 +1,18 @@
 import { throttle, StepWise } from './utils.js'
 
+const aplLabels = {
+  pending: 'warn',
+  approved: 'safe',
+  rejected: 'danger',
+  inactive: 'danger',
+}
+
+const jobLabels = {
+  running: 'safe',
+  deleted: 'danger',
+  inactive: 'danger',
+}
+
 /**
  * JSX-like helper to create elements
  * @param {string} tag Element tag name
@@ -222,6 +235,35 @@ const aplTemplate = ({ jobName, skills, orgName, submitted, appStatus }) => {
 `
 }
 
+const aplTemplateOrg = ({ fname, lname, submitted, appStatus, appDesc, jobName, jobStatus, expiry, userSkills }) => {
+  return `
+    <div class="row">
+      <h3>${fname} ${lname}</h3>
+      <div class="tag">#${userSkills}</div>
+    </div>
+
+    <!-- <div class="row">
+      <p class="sub-title">${jobName}</p>
+      <p class="meta" style="align-self: center;">expiry - <span>${parseDate(expiry)}</span></p>
+      <div class="label ${jobLabels[jobStatus]}">${jobStatus}</div>
+    </div>  -->
+
+    <div class="row desc">
+      <p>${appDesc}</p>
+    </div>
+
+    <div class="row">
+      <p class="meta">submitted - <span>${parseDate(submitted)}</span></p>
+      <div class="label ${aplLabels[appStatus]} app-status">${appStatus}</div>
+    </div>
+
+    <div class="row buttons">
+      <button class="t-btn primary approve">Approve</button>
+      <button class="t-btn primary reject">Reject</button>
+    </div>
+`
+}
+
 const disableFormInputs = form => {
   const inputs = Array.from(form.elements)
   inputs.forEach(input => input.setAttribute('disabled', 'disabled'))
@@ -249,4 +291,4 @@ const appendError = ({ error = 'Error', message = 'There was an error processing
   return errorObj
 }
 
-export { renderList, jobTemplate, aplTemplate, h, sel, scrolledDown, infiniteScrolling, Error, parseDate, disableFormInputs, appendError }
+export { renderList, jobTemplate, jobTemplateOrg, aplTemplate, aplTemplateOrg, h, sel, scrolledDown, infiniteScrolling, Error, parseDate, disableFormInputs, appendError, aplLabels, jobLabels }

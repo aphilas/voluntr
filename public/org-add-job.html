@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Voluntr | Jobs</title>
+
+  <link rel="stylesheet" href="./css/pages/org-add-job.css">
+  <script src="./js/org-add-job.js" type="module" defer></script>
+</head>
+<body>
+  <header class="header">
+    <p class="header-title">Voluntr</p>
+
+    <input type="checkbox" id="menu">
+    <label for="menu" onclick></label> <!-- ios hack -->
+
+    <nav class="nav" role="off-canvas">
+      <ul class="nav-ul">
+        <li><a href="./org-jobs.html">Jobs</a></li>
+        <li><a href="./org-profile.html">Profile</a></li>
+        <li><a href="./org-about.html">About</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="main">
+    <section class="add-job">
+      <h2 class="text--center">Add job</h2>
+
+      <form class="add-job-form" method="POST">
+        <div class="field-wrapper">
+          <label for="job-name">Job Name </label>
+          <input type="text" name="job-name" id="job-name" placeholder="Community Outreach" class="t-inp solid">
+        </div>
+
+        <div class="field-wrapper">
+          <label for="lname">Skill </label>
+          <select name="skills" id="skill" class="t-sel">
+            <option value="coding" selected>Coding</option>
+            <option value="design">Design</option>
+            <option value="health">Health</option>
+            <option value="finance">Finance</option>
+            <option value="law">Law</option>
+            <option value="engineering">Engineering</option>
+            <option value="training">Training</option>
+          </select>
+        </div>
+    
+        <div class="field-wrapper">
+          <label for="job-desc">Description </label>
+          <div>
+            <textarea name="job-desc" id="job-desc" cols="19" rows="3" placeholder="Clerical work"></textarea>
+          </div>
+        </div>
+    
+        <div class="field-wrapper">
+          <label for="expiry">Expiry </label>
+          <input type="date" name="expiry" id="expiry" placeholder="" class="t-inp solid">
+        </div>
+    
+        <div class="add-job-submit center">
+          <input class="t-btn outline" type="submit" value="Add">
+        </div>
+
+        <input type="hidden" name="org-id" id="org-id">
+      </form>
+    </section>
+  </main>
+
+</body>
+</html>
