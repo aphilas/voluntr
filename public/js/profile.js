@@ -1,5 +1,6 @@
 import { sel, Error, disableFormInputs, appendError } from './dom.js'
 import { queryServer, parseCookies, parseJwt, objToCamel } from './utils.js'
+import { baseUrl } from './config.js'
 
 const form = sel('.profile > form')
 disableFormInputs(form)
@@ -14,13 +15,21 @@ const updateForm = (obj) => {
 const init = (async () => {
   const { token } = parseCookies(document.cookie)
 
+  const pageUrl = new URL(document.location)
+  const jobId = parseInt(pageUrl.searchParams.get('org-id'))
+
+  // if (jobId) {
+  //   window.location.assign(baseUrl + )
+  // }
+  
   if (!token) {
     sel('.profile').innerHTML = ''
     appendError({ error: 'Authentication Error' })
     return
   }
-
-  const { id, rol: role } = parseJwt(token)
+  
+  let { id, rol: role } = parseJwt(token)
+  
   const res = await queryServer('GET', `/api/${role}/${id}`)
   const { success, error, message } = res
 

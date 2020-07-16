@@ -10,8 +10,8 @@ const getDate = (addMonths = 0) => {
 }
 
 const dateEl = sel('input[type=date]')
-dateEl.setAttribute('min', getDate())
-dateEl.setAttribute('value', getDate(1))
+// dateEl.setAttribute('min', getDate())
+// dateEl.setAttribute('value', getDate(1))
 
 const addJobRequest = async (formData) => {
   const url = baseUrl + '/api/job'
